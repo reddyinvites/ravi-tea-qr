@@ -1,22 +1,23 @@
-# ---------------- QR CODE ----------------
+import streamlit as st
 import qrcode
 from io import BytesIO
 
-st.subheader("📲 Scan & Start")
+st.set_page_config(page_title="Ravi Tea QR")
 
+# ---------------- LINK ----------------
 APP_URL = "https://ravi-tea-rewards.streamlit.app"
 
+# ---------------- UI ----------------
+st.title("☕ RAVI TEA QR")
+st.write("Scan to open rewards page")
+
+# ---------------- QR GENERATION ----------------
 qr = qrcode.make(APP_URL)
 
 buf = BytesIO()
 qr.save(buf)
 buf.seek(0)
 
-st.image(buf, width=250)
+st.image(buf)
 
-st.download_button(
-    label="⬇️ Download QR",
-    data=buf,
-    file_name="ravi_tea_qr.png",
-    mime="image/png"
-)
+st.success("QR ready ✅")
